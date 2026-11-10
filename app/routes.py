@@ -6,14 +6,16 @@ main = Blueprint("main", __name__)
 
 @main.route("/")
 def home():
-    # Fetch live air quality data
     city_data = fetch_all_cities()
-
-    # Rank cities from lowest to highest PM2.5
     ranked_cities = rank_cities(city_data)
 
-    # Send data to the webpage
+    error = None
+
+    if not ranked_cities:
+        error = "Unable to fetch air quality data. Please try again later."
+
     return render_template(
         "smog_watch.html",
-        cities=ranked_cities
+        cities=ranked_cities,
+        error=error
     )
