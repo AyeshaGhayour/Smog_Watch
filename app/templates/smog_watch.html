@@ -12,9 +12,19 @@
     <header>
         <h1>SmogWatch 🌫️</h1>
         <p>Live Air Quality Monitoring Across Pakistan</p>
+        <form action="/" method="GET">
+    <button type="submit" class="refresh-btn">
+        ↻ Refresh Data
+    </button>
+</form>
     </header>
 
     <h2>City Air Quality Rankings</h2>
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% endif %}
 
     <div class="city-container">
         {% for city in cities %}
