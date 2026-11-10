@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmogWatch | Air Quality Monitor</title>
+</head>
+<body>
+
+    <h1>SmogWatch</h1>
+    <p>Live Air Quality Monitoring Across Pakistan</p>
+
+    <h2>City Air Quality Rankings</h2>
+
+    {% for city in cities %}
+        <div>
+            <h3>{{ loop.index }}. {{ city.city }}</h3>
+            <p>PM2.5: {{ city.pm2_5 }} {{ city.unit }}</p>
+            <p>Air Quality: {{ city.air_quality }}</p>
+            <p>Updated: {{ city.time }}</p>
+        </div>
+    {% endfor %}
+
+</body>
+</html>
