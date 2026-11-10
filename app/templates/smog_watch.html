@@ -5,22 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmogWatch | Air Quality Monitor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
 
-    <h1>SmogWatch</h1>
-    <p>Live Air Quality Monitoring Across Pakistan</p>
+<body>
+    <header>
+        <h1>SmogWatch 🌫️</h1>
+        <p>Live Air Quality Monitoring Across Pakistan</p>
+    </header>
 
     <h2>City Air Quality Rankings</h2>
 
-    {% for city in cities %}
-        <div>
-            <h3>{{ loop.index }}. {{ city.city }}</h3>
-            <p>PM2.5: {{ city.pm2_5 }} {{ city.unit }}</p>
-            <p>Air Quality: {{ city.air_quality }}</p>
-            <p>Updated: {{ city.time }}</p>
-        </div>
-    {% endfor %}
+    <div class="city-container">
+        {% for city in cities %}
+            <div class="city-card">
+                <h3>{{ loop.index }}. {{ city.city }}</h3>
 
+                <p class="pm-value">
+                    {{ city.pm2_5 }} {{ city.unit }}
+                </p>
+
+               <span class="quality
+               {% if city.air_quality == 'Good' %}good
+               {% elif city.air_quality == 'Moderate' %}moderate
+               {% else %}unhealthy
+               {% endif %}">
+
+                <p class="updated">
+                    Updated: {{ city.time }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
 </body>
+
 </html>
