@@ -1,4 +1,5 @@
 
+from app.utils import classify_air_quality
 import requests
 
 # Open-Meteo Air Quality API
@@ -39,6 +40,9 @@ def fetch_city_data(city, coordinates):
         return {
             "city": city,
             "pm2_5": current_data["pm2_5"],
+            "air_quality": classify_air_quality(
+                current_data["pm2_5"]
+            ),
             "time": current_data["time"],
             "unit": data["current_units"]["pm2_5"]
         }
@@ -78,5 +82,6 @@ if __name__ == "__main__":
         print(
             f"{city['city']}: "
             f"{city['pm2_5']} {city['unit']} "
+            f"| Category: {city['air_quality']} "
             f"| Updated: {city['time']}"
         )
