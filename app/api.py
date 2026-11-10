@@ -1,5 +1,4 @@
-
-from app.utils import classify_air_quality
+from app.utils import classify_air_quality, rank_cities
 import requests
 
 # Open-Meteo Air Quality API
@@ -72,16 +71,21 @@ def fetch_all_cities():
     return results
 
 
-# Test the API integration
+
+# Test the API integration and city ranking
 if __name__ == "__main__":
+
+    # First, fetch data from the API
     air_quality_data = fetch_all_cities()
 
-    print("\n===== SMOGWATCH LIVE AIR QUALITY =====")
+    # Then, rank cities from lowest to highest PM2.5
+    ranked_cities = rank_cities(air_quality_data)
 
-    for city in air_quality_data:
+    print("\n===== SMOGWATCH CITY RANKING =====")
+
+    for position, city in enumerate(ranked_cities, start=1):
         print(
-            f"{city['city']}: "
-            f"{city['pm2_5']} {city['unit']} "
-            f"| Category: {city['air_quality']} "
-            f"| Updated: {city['time']}"
+            f"{position}. {city['city']} | "
+            f"PM2.5: {city['pm2_5']} {city['unit']} | "
+            f"Category: {city['air_quality']}"
         )
