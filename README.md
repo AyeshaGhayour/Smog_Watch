@@ -61,6 +61,9 @@ SmogWatch uses the Open-Meteo Air Quality API to retrieve current PM2.5 readings
 - Parameter: current=pm2_5
 - Data unit: μg/m³
 - Location: Five major cities in Pakistan.
+## Dashboard Preview
+
+![SmogWatch Dashboard](Screenshots/Dashboard.png)
 Note: Open-Meteo provides model-based air quality estimates. These readings should not be interpreted as direct measurements from physical monitoring stations.
 Air Quality Classification
 The project uses simplified PM2.5 concentration thresholds to categorize pollution levels:
